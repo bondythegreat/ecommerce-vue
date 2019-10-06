@@ -1,5 +1,12 @@
 @import "bootstrap";
+@import "./components/variables";
+@import "./mixins/breakpoints";
+
 @import "./fontawesome/solid";
 @import "./fontawesome/fontawesome";
 
 @import "./components/typography";
+@import "./components/header";
+@import "./components/products";
+@import "./components/pagination";
+@import "./components/footer";

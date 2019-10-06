@@ -1,0 +1,27 @@
+header {
+	margin-bottom: 30px;
+}
+.navigation-bar {
+	padding: 10px 0;
+}
+.header-logo {
+	font-family: 'Bree Serif', serif;
+	font-size: 46px;
+    font-weight: bold;
+    line-height: 1em;
+    text-decoration: none;
+    &:hover {
+    	text-decoration: none;
+    }
+}
+
+.ribbon {
+	padding: 5px 0;
+	&.blue {
+		background-color: #4242b0;
+		color: white;
+		a {
+			color: white;
+		}
+	}
+}
