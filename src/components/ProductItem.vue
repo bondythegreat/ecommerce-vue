@@ -2,7 +2,7 @@
 	<div class="product-item">
     	<div class="image-container" :style="{ backgroundImage: 'url(' + item.imageUrl + ')' }">
 
-    		<button class="btn btn-primary add-to-cart">Add to cart</button>
+    		<button class="btn btn-primary add-to-cart" @click="addItem" v-scroll-to="'#cart'">Add to cart</button>
     	</div>
     	<div class="product-text">
     		<h2>{{item.name}}</h2>
@@ -15,6 +15,12 @@
 <script>
 export default {
   name: 'ProductItem',
-  props: ['item']
+  props: ['item'],
+  methods: {
+  	addItem() {
+  		this.$store.commit('openCart');
+  		this.$store.commit('addItem', this.item);
+  	}
+  }
 }
 </script>

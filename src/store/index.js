@@ -6,27 +6,30 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     items:[],
-
+    cartOpenStatus: false
   },
-
   mutations: {
    	deleteAll() {
    		state.items = [];
    	},
-   	deleteItem(id) {
+   	deleteItem(state, id) {
    		if (state.items.length) {
    			state.items.splice(state.items.indexOf(state.items.find(item=>item.id == id)),1);
    		}
    	},
-   	incrementQty(id) {
+   	incrementQty(state, id) {
    		let item = state.items.find(item => item.id == id);
    		item.qty++;
    	},
-   	decrementQty(id) {
+   	decrementQty(state, id) {
    		let item = state.items.find(item => item.id == id);
-   		item.qty = item.qty > 0 ? item.qty-- : 0;
+   		if (item.qty > 0) {
+   			item.qty--
+   		} else {
+   			item.qty = 0;
+   		}
    	},
-   	addItem(obj) {
+   	addItem(state, obj) {
    		//check first
    		const filtered = state.items.filter(item => item.id == obj.id);
 
@@ -39,12 +42,19 @@ export const store = new Vuex.Store({
    		} else {
    			const newItem = {
    				id: obj.id,
+   				name: obj.name,
    				qty: 1,
-   				price: obj.price
+   				price: obj.salePrice
    			}
 
    			state.items.push(newItem);
    		}
+   	},
+   	openCart(state) {
+   		state.cartOpenStatus = true;
+   	},
+   	closeCart(state) {
+   		state.cartOpenStatus = false;
    	}
   },
 
@@ -55,6 +65,12 @@ export const store = new Vuex.Store({
     		total += parseInt(item.qty) * parseInt(item.price)
     	});
     	return total;
+    },
+    isEmpty(state) {
+    	return state.items.length == 0;
+    },
+    isCartOpen(state) {
+    	return state.cartOpenStatus;
     }
   }
 });
